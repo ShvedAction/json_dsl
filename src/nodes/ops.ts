@@ -1,9 +1,21 @@
-import type { DslNode } from '../types.js';
+import { evalNode } from '../eval.js';
+import { DslError, type MulNode, type SumNode } from '../types.js';
 
-export function evalSum(_node: DslNode & { type: 'sum' }, _context: unknown): unknown {
-  throw new Error('Not implemented');
+function asNumber(value: unknown, op: string): number {
+  if (typeof value !== 'number' || Number.isNaN(value)) {
+    throw new DslError('INVALID_OPERAND', `${op} expects a number`);
+  }
+  return value;
 }
 
-export function evalMul(_node: DslNode & { type: 'mul' }, _context: unknown): unknown {
-  throw new Error('Not implemented');
+export function evalSum(node: SumNode, context: unknown): number {
+  const left = asNumber(evalNode(node.op1, context), 'sum');
+  const right = asNumber(evalNode(node.op2, context), 'sum');
+  return left + right;
+}
+
+export function evalMul(node: MulNode, context: unknown): number {
+  const left = asNumber(evalNode(node.op1, context), 'mul');
+  const right = asNumber(evalNode(node.op2, context), 'mul');
+  return left * right;
 }

@@ -1,5 +1,22 @@
-import type { DslNode } from './types.js';
+import { evalRead } from './nodes/read.js';
+import { evalMul, evalSum } from './nodes/ops.js';
+import { evalReduce } from './nodes/reduce.js';
+import { DslError, type DslNode } from './types.js';
 
-export function evalNode(_node: DslNode, _context: unknown): unknown {
-  throw new Error('Not implemented');
+export function evalNode(node: DslNode, context: unknown): unknown {
+  switch (node.type) {
+    case 'read':
+      return evalRead(node, context);
+    case 'sum':
+      return evalSum(node, context);
+    case 'mul':
+      return evalMul(node, context);
+    case 'reduce':
+      return evalReduce(node, context);
+    default:
+      throw new DslError(
+        'UNKNOWN_NODE',
+        `Unknown node type: ${(node as { type: string }).type}`
+      );
+  }
 }

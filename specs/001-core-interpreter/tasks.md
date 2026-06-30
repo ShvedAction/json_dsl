@@ -3,7 +3,7 @@
 **Spec:** [spec.md](./spec.md)  
 **Plan:** [plan.md](./plan.md)  
 **Дата:** 2026-06-30  
-**Статус:** in_progress — фаза тестов
+**Статус:** completed
 
 ## Phase 0: Contract (types & fixtures)
 
@@ -25,7 +25,7 @@
 
 > Goal: владелец подтверждает, что тесты проверяют нужное поведение из spec
 
-- [ ] T006 [Product] **Ревью тестов** — прочитать `tests/*.test.ts` + таблицу покрытия в [spec.md](./spec.md); явно отметить `[x]` когда готовы к реализации
+- [x] T006 [Product] **Ревью тестов** — прочитать `tests/*.test.ts` + таблицу покрытия в [spec.md](./spec.md); явно отметить `[x]` когда готовы к реализации
 
 **До закрытия T006 реализация в `src/` запрещена** (кроме types и throw-заглушек).
 
@@ -33,19 +33,19 @@
 
 > Goal: снять заглушки, пройти тесты; не менять утверждения в тестах
 
-- [ ] T007 [Implementer] `src/path.ts` — resolvePath
-- [ ] T008 [Implementer] `src/nodes/read.ts` — evalRead
-- [ ] T009 [Implementer] `src/nodes/ops.ts` — evalSum, evalMul
-- [ ] T010 [Implementer] `src/nodes/reduce.ts` — evalReduce
-- [ ] T011 [Implementer] `src/eval.ts` — evalNode dispatch
-- [ ] T012 [Implementer] `src/index.ts` — dslInterpreter
+- [x] T007 [Implementer] `src/path.ts` — resolvePath
+- [x] T008 [Implementer] `src/nodes/read.ts` — evalRead
+- [x] T009 [Implementer] `src/nodes/ops.ts` — evalSum, evalMul
+- [x] T010 [Implementer] `src/nodes/reduce.ts` — evalReduce
+- [x] T011 [Implementer] `src/eval.ts` — evalNode dispatch
+- [x] T012 [Implementer] `src/index.ts` — dslInterpreter
 
 ## Phase 4: Verification
 
 > Goal: DoD
 
-- [ ] T013 [Verifier] DoD check по [definition-of-done.md](../../docs/sdd/definition-of-done.md)
-- [ ] T014 [Verifier] `npm run typecheck && npm test` green
+- [x] T013 [Verifier] DoD check по [definition-of-done.md](../../docs/sdd/definition-of-done.md)
+- [x] T014 [Verifier] `npm run typecheck && npm test` green
 
 ## Legend
 

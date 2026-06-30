@@ -1,5 +1,6 @@
-import type { DslNode } from '../types.js';
+import { resolvePath } from '../path.js';
+import type { ReadNode } from '../types.js';
 
-export function evalRead(_node: DslNode & { type: 'read' }, _context: unknown): unknown {
-  throw new Error('Not implemented');
+export function evalRead(node: ReadNode, context: unknown): unknown {
+  return resolvePath(context, node.path);
 }
