@@ -38,7 +38,7 @@ templates/           # library SDD templates
 ## SDD workflow
 
 1. Brain dump → `sdd-init` skill → approved artifacts
-2. Feature → `sdd-specify` → `sdd-plan` → `sdd-tasks` → implement
+2. Feature → `sdd-specify` → `sdd-plan` → `sdd-tasks` → **тесты (RED)** → ревью → implement (GREEN)
 3. Requirement changes after v0.1 → `sdd-maintain` + `changes/`
 
 ## Code style

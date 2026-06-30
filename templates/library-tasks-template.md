@@ -5,27 +5,42 @@
 **Дата:** [DATE]  
 **Статус:** [STATUS]
 
-## Phase 1: [PHASE_NAME]
+## Phase 0: Contract
 
-> Goal: [PHASE_GOAL]
+> Goal: types + fixtures
 
-- [ ] T001 [Architect] [TASK_DESCRIPTION]
-- [ ] T002 [Implementer] [TASK_DESCRIPTION]
-- [ ] T003 [P] [Implementer] [PARALLEL_TASK]
+- [ ] T001 [Architect] types
+- [ ] T002 [Implementer] fixtures
 
-## Phase 2: Verification
+## Phase 1: Tests (RED)
 
-- [ ] T004 [Verifier] DoD check по [definition-of-done.md](../../docs/sdd/definition-of-done.md)
-- [ ] T005 [Verifier] `npm run typecheck && npm test` green
+> Goal: тесты по spec; `npm test` падает — ожидаемо
+
+- [ ] T003 [Implementer] unit/integration tests по таблице покрытия в spec
+- [ ] T004 [Implementer] throw-заглушки в `src/` для компиляции
+
+## Phase 2: Test review (GATE)
+
+- [ ] T005 [Product] **Ревью тестов** — подтвердить покрытие REQ/EDGE
+
+**До T005 реализация в `src/` запрещена.**
+
+## Phase 3: Implementation (GREEN)
+
+- [ ] T006 [Implementer] [IMPLEMENTATION_TASK]
+
+## Phase 4: Verification
+
+- [ ] T007 [Verifier] DoD check
+- [ ] T008 [Verifier] `npm run typecheck && npm test` green
 
 ## Legend
 
-- `[P]` — можно выполнять параллельно с соседней `[P]` задачей
-- Roles: Architect | Implementer | Verifier
+- `[P]` — параллельно
+- Roles: Architect | Implementer | Verifier | **Product** (ревью тестов)
 
 ## Dependencies
 
 ```
-T001 → T002 → T004
-T003 [P] T002
+T001 → T002 → T003 → T004 → T005 → T006 → T007 → T008
 ```

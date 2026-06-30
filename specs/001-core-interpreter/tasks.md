@@ -3,51 +3,60 @@
 **Spec:** [spec.md](./spec.md)  
 **Plan:** [plan.md](./plan.md)  
 **Дата:** 2026-06-30  
-**Статус:** pending
+**Статус:** in_progress — фаза тестов
 
-## Phase 1: Types & fixtures
+## Phase 0: Contract (types & fixtures)
 
-> Goal: типы AST и fixtures из brain dump
+> Goal: контракт и данные для тестов, без логики
 
-- [ ] T001 [Architect] `src/types.ts` — DslProgram, node types, ComputationResult, DslError
-- [ ] T002 [Implementer] `tests/fixtures/cart-equipment.json` — source + program для TC-001
+- [x] T001 [Architect] `src/types.ts` — DslProgram, node types, ComputationResult, DslError
+- [x] T002 [Implementer] `tests/fixtures/cart-equipment.json` — source + program для TC-001
 
-## Phase 2: Path & read
+## Phase 1: Tests (RED)
 
-> Goal: разрешение path и узел read
+> Goal: полный набор тестов по spec; `npm test` падает — это норма
 
-- [ ] T003 [Implementer] `src/path.ts` — resolvePath + `tests/path.test.ts` (EDGE-002)
-- [ ] T004 [Implementer] `src/nodes/read.ts` — evalRead + тесты
+- [x] T003 [Implementer] `tests/path.test.ts` — EDGE-002
+- [x] T004 [Implementer] `tests/nodes.test.ts` — REQ-001, REQ-002, EDGE-001, EDGE-003 (unit)
+- [x] T005 [Implementer] `tests/dslInterpreter.test.ts` — TC-001, REQ-003, EDGE-001, EDGE-003 (integration)
+- [x] T005b [Implementer] Заглушки `src/path.ts`, `src/nodes/*`, `src/eval.ts` — только `throw`, для компиляции тестов
 
-## Phase 3: Ops & reduce
+## Phase 2: Test review (GATE)
 
-> Goal: sum, mul, reduce
+> Goal: владелец подтверждает, что тесты проверяют нужное поведение из spec
 
-- [ ] T005 [Implementer] `src/nodes/ops.ts` — evalSum, evalMul + тесты
-- [ ] T006 [Implementer] `src/nodes/reduce.ts` — evalReduce + тесты (EDGE-001)
+- [ ] T006 [Product] **Ревью тестов** — прочитать `tests/*.test.ts` + таблицу покрытия в [spec.md](./spec.md); явно отметить `[x]` когда готовы к реализации
 
-## Phase 4: Interpreter
+**До закрытия T006 реализация в `src/` запрещена** (кроме types и throw-заглушек).
 
-> Goal: evalNode + dslInterpreter + integration
+## Phase 3: Implementation (GREEN)
 
-- [ ] T007 [Implementer] `src/eval.ts` — evalNode dispatch (EDGE-003)
-- [ ] T008 [Implementer] `src/index.ts` — dslInterpreter + `tests/dslInterpreter.test.ts` (REQ-001..003, TC-001)
+> Goal: снять заглушки, пройти тесты; не менять утверждения в тестах
 
-## Phase 5: Verification
+- [ ] T007 [Implementer] `src/path.ts` — resolvePath
+- [ ] T008 [Implementer] `src/nodes/read.ts` — evalRead
+- [ ] T009 [Implementer] `src/nodes/ops.ts` — evalSum, evalMul
+- [ ] T010 [Implementer] `src/nodes/reduce.ts` — evalReduce
+- [ ] T011 [Implementer] `src/eval.ts` — evalNode dispatch
+- [ ] T012 [Implementer] `src/index.ts` — dslInterpreter
 
-> Goal: DoD и CI-local checks
+## Phase 4: Verification
 
-- [ ] T009 [Verifier] DoD check по [definition-of-done.md](../../docs/sdd/definition-of-done.md)
-- [ ] T010 [Verifier] `npm run typecheck && npm test` green
+> Goal: DoD
+
+- [ ] T013 [Verifier] DoD check по [definition-of-done.md](../../docs/sdd/definition-of-done.md)
+- [ ] T014 [Verifier] `npm run typecheck && npm test` green
 
 ## Legend
 
 - `[P]` — можно выполнять параллельно с соседней `[P]` задачей
-- Roles: Architect | Implementer | Verifier
+- Roles: Architect | Implementer | Verifier | **Product** (ревью тестов)
+- **RED** — тесты падают до реализации; **GREEN** — все проходят
 
 ## Dependencies
 
 ```
-T001 → T002 → T003 → T004 → T005 → T006 → T007 → T008 → T009 → T010
-T005 [P] T004
+T001 → T002 → T003 → T004 → T005 → T005b → T006
+T006 → T007 → T008 → T009 → T010 → T011 → T012 → T013 → T014
+T008 [P] T009
 ```

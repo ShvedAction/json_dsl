@@ -18,6 +18,7 @@ export type { DslProgram, ComputationResult, DslNode } from './types';
 - **Pure function** — `dslInterpreter` deterministic, sync, no I/O, no globals
 - **TypeScript strict** — named exports, English identifiers
 - **Тесты** — `node:test` + `tsx` (devDependencies only)
+- **Test-first** — тесты по spec пишутся до реализации; реализация `src/` после ревью тестов владельцем (см. tasks.md gate T006)
 - **Документация** — русский; breaking changes → semver + ADR
 
 ## Граф вычислений (v0.1)
@@ -35,5 +36,6 @@ export type { DslProgram, ComputationResult, DslNode } from './types';
 ## SDD gates
 
 - Нет feature-кода без approved `specs/NNN-*/spec.md`
+- **Test-first:** тесты по REQ/EDGE → ревью владельца → затем реализация
 - Каждый REQ/EDGE из spec покрыт unit-тестом
 - Архитектурные решения → ADR в `docs/adr/`

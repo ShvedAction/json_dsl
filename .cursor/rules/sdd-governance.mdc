@@ -11,9 +11,10 @@ Before any feature implementation, read `docs/sdd/constitution.md`.
 
 1. **No feature code** without approved `specs/NNN-*/spec.md`
 2. **No architectural changes** without ADR in `docs/adr/`
-3. **No REQ without test** — каждый REQ/EDGE из spec покрыт unit-тестом
-4. **No runtime dependencies** without ADR (default: forbidden)
-5. After implement: update `tasks.md` checkboxes; sync glossary if new terms
+3. **Test-first** — тесты по REQ/EDGE пишутся до реализации; **no `src/` logic** until test review gate closed in `tasks.md`
+4. **No REQ without test** — каждый REQ/EDGE из spec покрыт unit-тестом
+5. **No runtime dependencies** without ADR (default: forbidden)
+6. After implement: update `tasks.md` checkboxes; sync glossary if new terms
 
 ## Artifact language
 

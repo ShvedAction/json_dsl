@@ -22,8 +22,10 @@
 
 ### Tests
 
+- [ ] Все REQ/EDGE из spec имеют тесты **до** начала реализации
+- [ ] Ревью тестов владельцем пройдено (gate в `tasks.md`)
 - [ ] Unit tests для всех публичных путей и edge cases из spec
-- [ ] `npm test` green
+- [ ] `npm test` green (после фазы реализации)
 
 ### Tasks
 

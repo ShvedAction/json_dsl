@@ -8,6 +8,19 @@
 
 Реализовать минимальный JSON DSL интерпретатор: одна публичная функция `dslInterpreter`, принимающая source data и DSL program, возвращающая массив `{ id, value }`. Поддержка узлов `read`, `reduce`, `sum`, `mul`. Eval последовательный по `computations[]`.
 
+## Workflow: test-first
+
+Реализация **только после** ревью тестов владельцем.
+
+```
+spec (REQ/EDGE) → тесты (RED) → ревью тестов → реализация (GREEN) → Verifier
+```
+
+1. **Тесты** пишутся по таблице «Покрытие тестами» ниже — каждый REQ/EDGE явно привязан к `it(...)`.
+2. **`npm test`** на этом этапе **должен падать** (RED) — это ожидаемо.
+3. **Ревью** — владелец проверяет, что тесты проверяют нужное поведение, не заглядывая в `src/` (кроме types/fixtures).
+4. После явного «тесты ок» в tasks.md (T006) — фаза реализации в `src/`.
+
 ## Public API
 
 ```typescript
@@ -49,6 +62,22 @@ export type DslProgram = {
 | TC-001 | `tests/fixtures/cart-equipment.json` → `source` | `tests/fixtures/cart-equipment.json` → `program` | `[{ id: "ip1", value: 500 }, { id: "etotal1", value: 740 }]` |
 
 Расчёт REQ-002: router 30×22=660, cable 10×3=30, modem 50×1=50 → sum=740.
+
+## Покрытие тестами
+
+| REQ/EDGE/TC | Файл | Тест (`it`) |
+|-------------|------|-------------|
+| EDGE-002 | `tests/path.test.ts` | `throws PATH_NOT_FOUND for missing key` |
+| EDGE-002 | `tests/path.test.ts` | `throws PATH_NOT_FOUND for missing nested path` |
+| EDGE-002 | `tests/path.test.ts` | `resolves object keys and array indices` |
+| REQ-001 | `tests/nodes.test.ts` | `evalRead reads value from source context` |
+| EDGE-001 | `tests/nodes.test.ts` | `evalReduce returns 0 for empty collection` |
+| REQ-002 | `tests/nodes.test.ts` | `evalReduce sums price * quantity over collection` |
+| EDGE-003 | `tests/nodes.test.ts` | `evalNode throws UNKNOWN_NODE for unknown type` |
+| TC-001 | `tests/dslInterpreter.test.ts` | `TC-001: cart-equipment fixture` |
+| REQ-003 | `tests/dslInterpreter.test.ts` | `returns results in computations order` |
+| EDGE-001 | `tests/dslInterpreter.test.ts` | `EDGE-001: empty equipment reduce` |
+| EDGE-003 | `tests/dslInterpreter.test.ts` | `EDGE-003: unknown computation type` |
 
 ## Out of scope
 

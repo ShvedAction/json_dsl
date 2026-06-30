@@ -9,17 +9,41 @@
 - [x] Zero runtime dependencies
 - [x] Pure function, sync evaluation
 - [x] Unit test coverage для всех REQ/EDGE из spec
+- [x] Test-first workflow (тесты → ревью → реализация)
 - [x] Новые runtime deps → ADR (не планируются)
+
+## Test-first workflow
+
+```mermaid
+flowchart LR
+  spec[spec REQ/EDGE] --> tests[Write tests RED]
+  tests --> review[Owner test review]
+  review -->|approved| impl[Implement src GREEN]
+  impl --> verify[Verifier DoD]
+```
+
+### Правила
+
+| Этап | Что делаем | `npm test` |
+|------|------------|------------|
+| **1. Контракт** | `src/types.ts`, fixtures | — |
+| **2. Тесты** | `tests/*.test.ts` по таблице покрытия в spec | **RED** (ожидаемо) |
+| **3. Ревью** | Владелец читает тесты + spec, без реализации | RED |
+| **4. Реализация** | `src/path.ts`, `src/nodes/*`, `src/eval.ts`, `src/index.ts` | → **GREEN** |
+
+**До ревью тестов (T006):** в `src/` только types и заглушки `throw new Error('Not implemented')` — не считается реализацией.
+
+**После ревью:** агент/разработчик снимает заглушки слой за слоем, не меняя утверждения в тестах без обновления spec.
 
 ## Technical approach
 
-Слои снизу вверх:
+Слои снизу вверх (реализация **после** фазы тестов):
 
 1. **Types** — AST types в `src/types.ts`
 2. **Path** — `resolvePath(context, path)` в `src/path.ts`
 3. **Nodes** — `evalRead`, `evalSum`, `evalMul`, `evalReduce` в `src/nodes/`
 4. **Dispatch** — `evalNode(node, context)` в `src/eval.ts`
-5. **Orchestrator** — `dslInterpreter` в `src/index.ts`: цикл по `computations`, сбор `{ id, value }`
+5. **Orchestrator** — `dslInterpreter` в `src/index.ts`
 
 ### Поток reduce
 
@@ -33,28 +57,25 @@ return accumulator
 
 ## File changes
 
-### New files
+### Phase: tests (до реализации)
 
 | Path | Purpose |
 |------|---------|
-| `src/types.ts` | `DslProgram`, node types, `ComputationResult`, `DslError` |
+| `tests/fixtures/cart-equipment.json` | TC-001 |
+| `tests/path.test.ts` | EDGE-002 |
+| `tests/nodes.test.ts` | REQ-001, REQ-002, EDGE-001, EDGE-003 (unit) |
+| `tests/dslInterpreter.test.ts` | TC-001, REQ-003, EDGE-001, EDGE-003 (integration) |
+
+### Phase: implementation (после ревью тестов)
+
+| Path | Purpose |
+|------|---------|
 | `src/path.ts` | `resolvePath` |
 | `src/nodes/read.ts` | `evalRead` |
 | `src/nodes/ops.ts` | `evalSum`, `evalMul` |
 | `src/nodes/reduce.ts` | `evalReduce` |
 | `src/eval.ts` | `evalNode` dispatch |
-| `src/index.ts` | `dslInterpreter` export |
-| `tests/fixtures/cart-equipment.json` | TC-001 fixtures |
-| `tests/path.test.ts` | path + EDGE-002 |
-| `tests/nodes.test.ts` | read, sum, mul, reduce |
-| `tests/dslInterpreter.test.ts` | REQ-001..003, TC-001, EDGE-001, EDGE-003 |
-
-### Modified files
-
-| Path | Change |
-|------|--------|
-| `package.json` | scripts, devDependencies, engines |
-| `tsconfig.json` | strict TS config |
+| `src/index.ts` | `dslInterpreter` |
 
 ## Data model
 
@@ -70,13 +91,17 @@ return accumulator
 ## Validation commands
 
 ```bash
+# Фаза тестов (RED ожидаем)
 npm run typecheck
 npm test
+
+# Фаза реализации (цель GREEN)
+npm run typecheck && npm test
 ```
 
 ## Risks
 
 | Risk | Mitigation |
 |------|------------|
-| Неявная типизация JSON на входе | strict types + runtime checks для operands |
-| Граф по `id` запросят рано | явный out-of-scope в spec |
+| Тесты проверяют детали реализации, а не контракт | integration-тесты через `dslInterpreter`; unit — только публичные eval-функции из plan |
+| Ревью пропущен | явный gate T006 в tasks.md |

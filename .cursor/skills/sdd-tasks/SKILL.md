@@ -17,10 +17,10 @@ description: >-
 
 1. Read spec, plan, DoD
 2. Create `specs/NNN-*/tasks.md` from `templates/library-tasks-template.md`
-3. Break into phases: types/fixtures → core eval → integration → verification
+3. Break into phases: types/fixtures → **tests (RED)** → **test review gate (Product)** → implementation (GREEN) → verification
 4. Each task: `- [ ] TNNN [Role] description`
 5. Mark parallelizable: `[P]`
-6. Include explicit unit test tasks per REQ/EDGE from spec
+6. Test tasks **before** implementation tasks; gate: owner approves tests in tasks.md
 7. Final phase: Verifier DoD check
 
 ## Task sizing
@@ -39,6 +39,7 @@ Each task must be:
 
 | Role | Tasks |
 |------|-------|
+| Product | Test review gate before implementation |
 | Architect | ADR, data model, module layout |
 | Implementer | Code + tests |
 | Verifier | DoD, typecheck, constitution check |
