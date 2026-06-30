@@ -1,0 +1,41 @@
+{
+  "source": {
+    "cart": {
+      "items": [
+        { "price": 500, "quantity": 2, "category": "electronics" },
+        { "price": 100, "quantity": 1, "category": "books" }
+      ],
+      "discount": 50,
+      "coupon": "PROMO123"
+    },
+    "equipment": [
+      { "name": "router", "price": 30, "available": true, "quantity": 22 },
+      { "name": "cable", "price": 10, "available": false, "quantity": 3 },
+      { "name": "modem", "price": 50, "available": true, "quantity": 1 }
+    ]
+  },
+  "program": {
+    "version": "1.0",
+    "computations": [
+      {
+        "type": "read",
+        "path": ["cart", "items", 0, "price"],
+        "id": "ip1"
+      },
+      {
+        "type": "reduce",
+        "collection": { "type": "read", "path": ["equipment"] },
+        "aggregator": {
+          "type": "sum",
+          "op1": { "type": "read", "path": ["accumulator"] },
+          "op2": {
+            "type": "mul",
+            "op1": { "type": "read", "path": ["item", "price"] },
+            "op2": { "type": "read", "path": ["item", "quantity"] }
+          }
+        },
+        "id": "etotal1"
+      }
+    ]
+  }
+}

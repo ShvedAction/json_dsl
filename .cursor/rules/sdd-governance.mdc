@@ -1,0 +1,43 @@
+---
+description: SDD governance — constitution, spec gates, artifact sync
+alwaysApply: true
+---
+
+# SDD Governance
+
+Before any feature implementation, read `docs/sdd/constitution.md`.
+
+## Phase gates
+
+1. **No feature code** without approved `specs/NNN-*/spec.md`
+2. **No architectural changes** without ADR in `docs/adr/`
+3. **No REQ without test** — каждый REQ/EDGE из spec покрыт unit-тестом
+4. **No runtime dependencies** without ADR (default: forbidden)
+5. After implement: update `tasks.md` checkboxes; sync glossary if new terms
+
+## Artifact language
+
+- Docs (ADR, glossary, specs): **Russian**
+- Code identifiers, files, npm names: **English**
+
+## Repo model
+
+- `json_dsl` = library repo = один npm-пакет, один public export (`dslInterpreter`)
+- Zero runtime dependencies by default
+
+## Change tracking (1→n)
+
+Use `sdd-maintain` skill + `changes/NNN-name/` — not direct spec edits for behavioral changes after v0.1.
+
+## Skills workflow
+
+| Step | Skill |
+|------|-------|
+| New library / bootstrap | `sdd-init` |
+| New feature | `sdd-specify` → `sdd-plan` → `sdd-tasks` |
+| Requirement changes | `sdd-maintain` |
+| Node env | `sdd-dev-env` |
+
+## Markers
+
+Use `[ASSUMED]` and `[TBD]` in specs for unconfirmed items. Resolve before marking spec approved.
