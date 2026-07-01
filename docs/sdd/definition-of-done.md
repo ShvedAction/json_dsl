@@ -13,6 +13,8 @@
 - [ ] `specs/NNN-*/spec.md` approved и соответствует constitution
 - [ ] Все REQ/EDGE из spec покрыты unit-тестами
 - [ ] Glossary обновлён, если появились новые термины
+- [ ] `docs/language/` обновлён (или README, если затронут quick start)
+- [ ] Verifier: каждый `case` в `src/eval.ts` описан в `docs/language/`
 
 ### Code
 
@@ -34,7 +36,7 @@
 
 ## DoD: библиотека (library level)
 
-- [ ] Публичный API задокументирован в spec
+- [ ] Публичный API задокументирован в spec и `docs/language/overview.md`
 - [ ] Constitution compliance check пройден
 - [ ] ADR для всех архитектурных решений
 

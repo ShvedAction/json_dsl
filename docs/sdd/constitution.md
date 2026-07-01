@@ -20,6 +20,7 @@ export type { DslProgram, ComputationResult, DslNode } from './types';
 - **Тесты** — `node:test` + `tsx` (devDependencies only)
 - **Test-first** — тесты по spec пишутся до реализации; реализация `src/` после ревью тестов владельцем (см. tasks.md gate T006)
 - **Документация** — русский; breaking changes → semver + ADR
+- **Потребительская документация** — `README.md` + `docs/language/` синхронны с реализованными узлами DSL; новый/изменённый `type` → обновление соответствующего раздела (skill `sdd-docs-language`)
 
 ## Граф вычислений (v0.1)
 
@@ -39,3 +40,4 @@ export type { DslProgram, ComputationResult, DslNode } from './types';
 - **Test-first:** тесты по REQ/EDGE → ревью владельца → затем реализация
 - Каждый REQ/EDGE из spec покрыт unit-тестом
 - Архитектурные решения → ADR в `docs/adr/`
+- **Doc sync:** `docs/language/` и README актуальны относительно `src/eval.ts`

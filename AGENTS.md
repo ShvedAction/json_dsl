@@ -26,7 +26,8 @@ npm test
 ```
 src/                 # library source, export dslInterpreter
 tests/               # node:test unit tests + fixtures
-docs/sdd/            # constitution, DoD, glossary
+docs/language/       # consumer DSL reference (см. README.md)
+docs/sdd/            # constitution, DoD, glossary (internal SDD)
 docs/adr/            # architecture decision records
 docs/brain-dumps/    # raw intake (not source of truth)
 specs/               # feature specs (NNN-name/)
@@ -39,7 +40,8 @@ templates/           # library SDD templates
 
 1. Brain dump → `sdd-init` skill → approved artifacts
 2. Feature → `sdd-specify` → `sdd-plan` → `sdd-tasks` → **тесты (RED)** → ревью → implement (GREEN)
-3. Requirement changes after v0.1 → `sdd-maintain` + `changes/`
+3. After implement → `sdd-docs-language` (sync `docs/language/`)
+4. Requirement changes after v0.1 → `sdd-maintain` + `changes/`
 
 ## Code style
 
@@ -53,6 +55,7 @@ templates/           # library SDD templates
 
 - Read files, run typecheck/test
 - Edit SDD artifacts and code within current approved spec scope
+- Update `docs/language/` when closing feature (Verifier)
 
 ### Ask first
 
@@ -64,12 +67,13 @@ templates/           # library SDD templates
 
 - Commit secrets or `.env`
 - Add runtime dependencies without ADR
-- Implement game/UI features
 - Implement without approved spec.md
+- Ship new DSL node without `docs/language/` update
 
 ## Key files
 
-- `docs/sdd/constitution.md` — non-negotiable rules
-- `docs/sdd/definition-of-done.md` — done criteria
-- `specs/001-core-interpreter/spec.md` — product source of truth for v0.1
-- `.cursor/skills/sdd-init/SKILL.md` — bootstrap entry point
+| Аудитория | Файлы |
+|-----------|-------|
+| Потребитель | [README.md](README.md), [docs/language/](docs/language/) |
+| SDD / агент | [docs/sdd/constitution.md](docs/sdd/constitution.md), [specs/](specs/) |
+| Doc sync | [.cursor/skills/sdd-docs-language/SKILL.md](.cursor/skills/sdd-docs-language/SKILL.md) |

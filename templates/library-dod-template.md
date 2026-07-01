@@ -13,6 +13,7 @@
 - [ ] `specs/NNN-*/spec.md` approved и соответствует constitution
 - [ ] Все REQ/EDGE из spec покрыты unit-тестами
 - [ ] Glossary обновлён, если появились новые термины
+- [ ] `docs/language/` обновлён (skill `sdd-docs-language`)
 
 ### Code
 

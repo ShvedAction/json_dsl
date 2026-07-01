@@ -23,7 +23,8 @@ Creates `specs/NNN-feature-name/spec.md` for a **feature inside a library**, not
 4. Include **Test cases table** — input fixtures → expected output
 5. Given-When-Then for all functional requirements
 6. List edge cases and explicit out-of-scope
-7. AskQuestion for approval before marking spec `approved`
+7. Указать целевой файл **`docs/language/*.md`** для новых/изменённых узлов DSL
+8. AskQuestion for approval before marking spec `approved`
 
 ## Quality checklist
 
@@ -31,7 +32,7 @@ Creates `specs/NNN-feature-name/spec.md` for a **feature inside a library**, not
 - [ ] Testable acceptance criteria
 - [ ] Test cases map to acceptance criteria
 - [ ] `[ASSUMED]` / `[TBD]` for gaps
-- [ ] Constitution compliance (zero-deps, pure function, unit tests)
+- [ ] Constitution compliance (zero-deps, pure function, unit tests, consumer docs plan)
 
 ## Output
 

@@ -24,7 +24,8 @@ npm test
 ```
 src/                 # library source, export dslInterpreter
 tests/               # node:test unit tests
-docs/sdd/            # constitution, DoD, glossary
+docs/language/       # consumer DSL reference (README links here)
+docs/sdd/            # constitution, DoD, glossary (internal)
 docs/adr/            # architecture decision records
 specs/               # feature specs (NNN-name/)
 changes/             # change proposals (1→n updates)
@@ -37,7 +38,8 @@ templates/           # library SDD templates
 1. Brain dump → `sdd-init` skill
 2. Feature → `sdd-specify` → `sdd-plan` → `sdd-tasks`
 3. Implement with test-first per spec
-4. Changes to existing behavior → `sdd-maintain` + `changes/`
+4. After implement → `sdd-docs-language` (sync `docs/language/`)
+5. Changes to existing behavior → `sdd-maintain` + `changes/`
 
 ## Code style
 
@@ -69,4 +71,6 @@ templates/           # library SDD templates
 
 - `docs/sdd/constitution.md` — non-negotiable rules
 - `docs/sdd/definition-of-done.md` — done criteria
+- `docs/language/overview.md` — consumer DSL reference
 - `.cursor/skills/sdd-init/SKILL.md` — bootstrap entry point
+- `.cursor/skills/sdd-docs-language/SKILL.md` — consumer docs sync

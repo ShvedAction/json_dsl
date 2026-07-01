@@ -21,7 +21,7 @@ description: >-
 4. Each task: `- [ ] TNNN [Role] description`
 5. Mark parallelizable: `[P]`
 6. Test tasks **before** implementation tasks; gate: owner approves tests in tasks.md
-7. Final phase: Verifier DoD check
+7. Final phase: Verifier DoD check + **sync `docs/language/`** (skill `sdd-docs-language`)
 
 ## Task sizing
 
@@ -42,7 +42,7 @@ Each task must be:
 | Product | Test review gate before implementation |
 | Architect | ADR, data model, module layout |
 | Implementer | Code + tests |
-| Verifier | DoD, typecheck, constitution check |
+| Verifier | DoD, typecheck, constitution check, **consumer docs sync** |
 
 ## Dependencies
 
@@ -57,4 +57,4 @@ T003 [P] T002
 
 Execute tasks in order. After each task: update checkbox `[x]`.
 
-All tasks done → Verifier phase → `sdd-maintain` if scope drifted.
+All tasks done → Verifier phase (incl. `sdd-docs-language`) → `sdd-maintain` if scope drifted.

@@ -14,17 +14,19 @@ Before any feature implementation, read `docs/sdd/constitution.md`.
 3. **Test-first** — тесты по REQ/EDGE пишутся до реализации; **no `src/` logic** until test review gate closed in `tasks.md`
 4. **No REQ without test** — каждый REQ/EDGE из spec покрыт unit-тестом
 5. **No runtime dependencies** without ADR (default: forbidden)
-6. After implement: update `tasks.md` checkboxes; sync glossary if new terms
+6. **Doc sync** — новый/изменённый узел DSL → обновить `docs/language/` (+ README при необходимости); drift `src/eval.ts` vs docs — блокер для Verifier
+7. After implement: update `tasks.md` checkboxes; sync glossary and consumer docs if needed
 
 ## Artifact language
 
-- Docs (ADR, glossary, specs): **Russian**
+- Docs (ADR, glossary, specs, `docs/language/`): **Russian**
 - Code identifiers, files, npm names: **English**
 
 ## Repo model
 
 - `json_dsl` = library repo = один npm-пакет, один public export (`dslInterpreter`)
 - Zero runtime dependencies by default
+- `docs/language/` = consumer reference; `docs/sdd/` = internal SDD
 
 ## Change tracking (1→n)
 
@@ -37,6 +39,7 @@ Use `sdd-maintain` skill + `changes/NNN-name/` — not direct spec edits for beh
 | New library / bootstrap | `sdd-init` |
 | New feature | `sdd-specify` → `sdd-plan` → `sdd-tasks` |
 | Requirement changes | `sdd-maintain` |
+| Consumer docs sync | `sdd-docs-language` |
 | Node env | `sdd-dev-env` |
 
 ## Markers

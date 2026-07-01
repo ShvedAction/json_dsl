@@ -47,7 +47,8 @@ changes/003-add-filter-op/
 Compare:
 
 - `specs/*/spec.md` vs code/tests
-- constitution vs practices (zero-deps, test coverage)
+- `src/eval.ts` switch cases vs `docs/language/`
+- constitution vs practices (zero-deps, test coverage, consumer docs)
 
 Report gaps; do not auto-fix without approval.
 
@@ -65,6 +66,7 @@ Merge approved delta into canonical artifacts:
 
 - `spec-delta.md` → `specs/NNN-*/spec.md`
 - glossary if new terms
+- **`docs/language/`** via `sdd-docs-language` if nodes/semantics changed
 - Mark `changes/NNN-*/` archived in proposal frontmatter
 
 ### 7. Constitution check

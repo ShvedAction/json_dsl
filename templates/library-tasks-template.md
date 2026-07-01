@@ -33,6 +33,7 @@
 
 - [ ] T007 [Verifier] DoD check
 - [ ] T008 [Verifier] `npm run typecheck && npm test` green
+- [ ] T009 [Verifier] sync `docs/language/` (`sdd-docs-language`)
 
 ## Legend
 
