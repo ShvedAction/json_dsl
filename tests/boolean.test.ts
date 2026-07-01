@@ -1,31 +1,62 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { evalNode } from '../src/eval';
-import { DslError } from '../src/types';
+import { evalNode } from '../src/eval.js';
+import { DslError } from '../src/types.js';
 
-describe('eq', () => {
-  it('eq returns true when values are strictly equal', () => {
-    const result = evalNode(
-      {
-        type: 'eq',
-        left: { type: 'literal', value: 'some_string_value' },
-        right: { type: 'literal', value: 'some_string_value' },
-      },
-      {}
+describe('eq (==)', () => {
+  it('eq uses loose equality like JS ==', () => {
+    assert.equal(
+      evalNode(
+        {
+          type: 'eq',
+          left: { type: 'literal', value: 1 },
+          right: { type: 'literal', value: '1' },
+        },
+        {}
+      ),
+      true
     );
-    assert.equal(result, true);
   });
 
-  it('eq returns false when values differ', () => {
-    const result = evalNode(
-      {
-        type: 'eq',
-        left: { type: 'read', path: ['item', 'some_property'] },
-        right: { type: 'literal', value: 'some_string_value' },
-      },
-      { item: { some_property: 'other' } }
+  it('eq returns false when loosely unequal', () => {
+    assert.equal(
+      evalNode(
+        {
+          type: 'eq',
+          left: { type: 'read', path: ['item', 'some_property'] },
+          right: { type: 'literal', value: 'some_string_value' },
+        },
+        { item: { some_property: 'other' } }
+      ),
+      false
     );
-    assert.equal(result, false);
+  });
+});
+
+describe('strictEq (===)', () => {
+  it('strictEq uses strict equality like JS ===', () => {
+    assert.equal(
+      evalNode(
+        {
+          type: 'strictEq',
+          left: { type: 'literal', value: 1 },
+          right: { type: 'literal', value: '1' },
+        },
+        {}
+      ),
+      false
+    );
+    assert.equal(
+      evalNode(
+        {
+          type: 'strictEq',
+          left: { type: 'literal', value: 'a' },
+          right: { type: 'literal', value: 'a' },
+        },
+        {}
+      ),
+      true
+    );
   });
 });
 

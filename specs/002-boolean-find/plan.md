@@ -14,7 +14,7 @@
 
 1. **`src/types.ts`** — новые node types; расширить `DslNode` union
 2. **`src/nodes/literal.ts`** — `evalLiteral`
-3. **`src/nodes/boolean.ts`** — `evalEq`, `evalAnd`, `evalOr`, `evalNot` + `asBoolean` helper
+3. **`src/nodes/boolean.ts`** — `evalEq` (`==`), `evalStrictEq` (`===`), `evalAnd`, `evalOr`, `evalNot`
 4. **`src/nodes/find.ts`** — `evalFind` + `predicateTruthy`
 5. **`src/eval.ts`** — dispatch новых типов
 6. **Тесты** — `boolean.test.ts`, `find.test.ts`, `dslInterpreter-find.test.ts`
@@ -28,13 +28,13 @@ for element of collection:
   if predicateTruthy(pred, predicateNode): 
     found = element
     return path ? resolvePath(found, path) : found
-return null
+return undefined
 ```
 
 ### predicateTruthy
 
 - if boolean → return value
-- if predicate node was `find` → return result !== null
+- if predicate node was `find` → JS truthiness (`undefined` is false)
 - else throw INVALID_OPERAND
 
 ## File changes
@@ -70,4 +70,4 @@ npm run typecheck && npm test
 | Risk | Mitigation |
 |------|------------|
 | Truthiness coercion неочевидна | явно в spec + unit test nested find |
-| `find` null vs throw | зафиксировано в spec EDGE-101 |
+| `find` null vs throw | `undefined` как `Array.find` |

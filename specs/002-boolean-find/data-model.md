@@ -12,7 +12,7 @@
 | `type` | `"literal"` |
 | `value` | `string \| number \| boolean \| null` |
 
-### EqNode
+### EqNode (`==`)
 
 | Field | Type |
 |-------|------|
@@ -20,65 +20,42 @@
 | `left` | `DslNode` |
 | `right` | `DslNode` |
 
-### AndNode / OrNode
+Eval: `left == right` (JS abstract equality).
+
+### StrictEqNode (`===`)
 
 | Field | Type |
 |-------|------|
-| `type` | `"and"` \| `"or"` |
-| `op1` | `DslNode` |
-| `op2` | `DslNode` |
+| `type` | `"strictEq"` |
+| `left` | `DslNode` |
+| `right` | `DslNode` |
 
-### NotNode
+Eval: `left === right` (JS strict equality).
 
-| Field | Type |
-|-------|------|
-| `type` | `"not"` |
-| `op` | `DslNode` |
+### AndNode / OrNode / NotNode
+
+Без изменений — см. spec.
 
 ### FindNode
 
-| Field | Type | Required |
-|-------|------|----------|
-| `type` | `"find"` | yes |
-| `collection` | `DslNode` | yes |
-| `predicate` | `DslNode` | yes |
-| `path` | `(string \| number)[]` | no |
-
-## Predicate context
-
-```typescript
-type FindContext = { item: unknown };
-```
-
-Eval `predicate` с `{ item: element }`. Родительский source context **не** пробрасывается в предикат (только `item`), как для `accumulator`/`item` в reduce.
+Возвращает `unknown | undefined`. Как `Array.find`.
 
 ## Predicate truthiness
 
 | Eval result | Used as predicate |
 |-------------|-------------------|
 | `boolean` | as-is |
-| `find` node result (object/null) | `true` if not `null` |
+| `find` result | JS truthiness (`undefined` → false) |
 | other non-boolean | throw `INVALID_OPERAND` |
 
-## DslErrorCode (расширение)
+## Пример TC-101
 
-Добавить без нового ADR — в рамках `INVALID_OPERAND` для не-boolean в `and`/`or`/`not`.
-
-## Пример TC-101 (сокращённо)
+Внутренний предикат — `eq` (`==`):
 
 ```json
 {
-  "type": "find",
-  "collection": { "type": "read", "path": ["equipment"] },
-  "predicate": {
-    "type": "find",
-    "collection": { "type": "read", "path": ["item", "nested_collection"] },
-    "predicate": {
-      "type": "eq",
-      "left": { "type": "read", "path": ["item", "some_property"] },
-      "right": { "type": "literal", "value": "some_string_value" }
-    }
-  },
-  "path": ["prop", "path"]
+  "type": "eq",
+  "left": { "type": "read", "path": ["item", "some_property"] },
+  "right": { "type": "literal", "value": "some_string_value" }
 }
 ```

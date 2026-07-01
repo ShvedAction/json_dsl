@@ -5,6 +5,7 @@ export type DslNode =
   | MulNode
   | LiteralNode
   | EqNode
+  | StrictEqNode
   | AndNode
   | OrNode
   | NotNode
@@ -17,6 +18,12 @@ export type LiteralNode = {
 
 export type EqNode = {
   type: 'eq';
+  left: DslNode;
+  right: DslNode;
+};
+
+export type StrictEqNode = {
+  type: 'strictEq';
   left: DslNode;
   right: DslNode;
 };

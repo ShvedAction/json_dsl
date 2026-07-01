@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { evalNode } from '../src/eval';
-import { DslError } from '../src/types';
+import { evalNode } from '../src/eval.js';
+import { DslError } from '../src/types.js';
 import fixture from './fixtures/nested-find.json' with { type: 'json' };
 
 const nestedFindPredicate = {
@@ -21,7 +21,7 @@ describe('find', () => {
         type: 'find',
         collection: { type: 'read', path: ['equipment'] },
         predicate: {
-          type: 'eq',
+          type: 'strictEq',
           left: { type: 'read', path: ['item', 'name'] },
           right: { type: 'literal', value: 'router' },
         },
@@ -29,7 +29,7 @@ describe('find', () => {
       fixture.source
     );
 
-    assert.equal((result as { name?: string })?.name, 'router');
+    assert.equal((result as { name?: string }).name, 'router');
   });
 
   it('nested find as predicate matches parent item', () => {
@@ -42,7 +42,7 @@ describe('find', () => {
       fixture.source
     );
 
-    assert.equal((result as { name?: string })?.name, 'router');
+    assert.equal((result as { name?: string }).name, 'router');
   });
 
   it('find with result path returns projected field', () => {
@@ -59,13 +59,13 @@ describe('find', () => {
     assert.equal(result, '/api/router');
   });
 
-  it('find returns null when no match', () => {
+  it('find returns undefined when no match (like Array.find)', () => {
     const result = evalNode(
       {
         type: 'find',
         collection: { type: 'read', path: ['equipment'] },
         predicate: {
-          type: 'eq',
+          type: 'strictEq',
           left: { type: 'read', path: ['item', 'name'] },
           right: { type: 'literal', value: 'missing' },
         },
@@ -73,16 +73,16 @@ describe('find', () => {
       fixture.source
     );
 
-    assert.equal(result, null);
+    assert.equal(result, undefined);
   });
 
-  it('find with path returns null when no match', () => {
+  it('find with path returns undefined when no match', () => {
     const result = evalNode(
       {
         type: 'find',
         collection: { type: 'read', path: ['equipment'] },
         predicate: {
-          type: 'eq',
+          type: 'strictEq',
           left: { type: 'read', path: ['item', 'name'] },
           right: { type: 'literal', value: 'missing' },
         },
@@ -91,7 +91,7 @@ describe('find', () => {
       fixture.source
     );
 
-    assert.equal(result, null);
+    assert.equal(result, undefined);
   });
 
   it('find throws INVALID_OPERAND when collection is not array', () => {
