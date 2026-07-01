@@ -10,7 +10,12 @@
 | **DSL instruction / DSL program** | Объект с полями `version` и `computations[]`, второй аргумент `dslInterpreter` |
 | **Computation** | Элемент массива `computations` с уникальным `id` и телом вычисления |
 | **Computation graph** | Зависимости между вычислениями; в v0.1 — линейный порядок в `computations[]` |
-| **Node** | Узел AST внутри computation (`read`, `reduce`, `sum`, `mul`, …) |
+| **Node** | Узел AST внутри computation (`read`, `reduce`, `sum`, `mul`, `eq`, `find`, …) |
+| **literal** | Константное значение в DSL |
+| **eq** | Абстрактное равенство `==` (как в JS) |
+| **strictEq** | Строгое равенство `===` (как в JS) |
+| **and / or / not** | Булевы комбинаторы |
+| **find** | Поиск первого элемента массива по предикату; как `Array.find` → элемент или `undefined` |
 | **read** | Узел чтения значения по path из source data или reduce-контекста |
 | **path** | Массив `(string \| number)[]` — ключи объекта или индексы массива |
 | **reduce** | Итерация по коллекции с агрегатором; контекст: `accumulator`, `item` |

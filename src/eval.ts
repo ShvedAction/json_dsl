@@ -1,7 +1,10 @@
-import { evalRead } from './nodes/read';
-import { evalMul, evalSum } from './nodes/ops';
-import { evalReduce } from './nodes/reduce';
-import { DslError, type DslNode } from './types';
+import { evalAnd, evalEq, evalNot, evalOr, evalStrictEq } from './nodes/boolean.js';
+import { evalFind } from './nodes/find.js';
+import { evalLiteral } from './nodes/literal.js';
+import { evalRead } from './nodes/read.js';
+import { evalMul, evalSum } from './nodes/ops.js';
+import { evalReduce } from './nodes/reduce.js';
+import { DslError, type DslNode } from './types.js';
 
 export function evalNode(node: DslNode, context: unknown): unknown {
   switch (node.type) {
@@ -13,6 +16,20 @@ export function evalNode(node: DslNode, context: unknown): unknown {
       return evalMul(node, context);
     case 'reduce':
       return evalReduce(node, context);
+    case 'literal':
+      return evalLiteral(node);
+    case 'eq':
+      return evalEq(node, context);
+    case 'strictEq':
+      return evalStrictEq(node, context);
+    case 'and':
+      return evalAnd(node, context);
+    case 'or':
+      return evalOr(node, context);
+    case 'not':
+      return evalNot(node, context);
+    case 'find':
+      return evalFind(node, context);
     default:
       throw new DslError(
         'UNKNOWN_NODE',

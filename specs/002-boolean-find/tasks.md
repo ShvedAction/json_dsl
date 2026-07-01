@@ -3,7 +3,7 @@
 **Spec:** [spec.md](./spec.md)  
 **Plan:** [plan.md](./plan.md)  
 **Дата:** 2026-06-30  
-**Статус:** in_progress — фаза тестов
+**Статус:** completed
 
 ## Phase 0: Contract
 
@@ -19,18 +19,18 @@
 
 ## Phase 2: Test review (GATE)
 
-- [ ] T106 [Product] **Ревью тестов** — подтвердить покрытие REQ/EDGE
+- [x] T106 [Product] **Ревью тестов** — подтвердить покрытие REQ/EDGE
 
 ## Phase 3: Implementation (GREEN)
 
-- [ ] T107 [Implementer] `src/nodes/literal.ts`, `src/nodes/boolean.ts`
-- [ ] T108 [Implementer] `src/nodes/find.ts`
-- [ ] T109 [Implementer] `src/eval.ts` + `src/types.ts`
-- [ ] T110 [Implementer] glossary sync
+- [x] T107 [Implementer] `src/nodes/literal.ts`, `src/nodes/boolean.ts`
+- [x] T108 [Implementer] `src/nodes/find.ts`
+- [x] T109 [Implementer] `src/eval.ts` + `src/types.ts`
+- [x] T110 [Implementer] glossary sync
 
 ## Phase 4: Verification
 
-- [ ] T111 [Verifier] 001 + 002 tests green, DoD
+- [x] T111 [Verifier] 001 + 002 tests green, DoD
 
 ## Dependencies
 

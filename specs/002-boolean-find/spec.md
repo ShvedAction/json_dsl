@@ -2,7 +2,7 @@
 
 **ID:** 002-boolean-find  
 **Дата:** 2026-06-30  
-**Статус:** draft  
+**Статус:** approved  
 **Зависит от:** [001-core-interpreter](../001-core-interpreter/spec.md)
 
 ## Overview

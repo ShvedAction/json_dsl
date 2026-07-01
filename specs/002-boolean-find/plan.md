@@ -2,7 +2,7 @@
 
 **Spec:** [spec.md](./spec.md)  
 **Дата:** 2026-06-30  
-**Статус:** draft
+**Статус:** approved
 
 ## Constitution check
 
