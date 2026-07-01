@@ -1,8 +1,9 @@
 import { evalAnd, evalEq, evalNot, evalOr, evalStrictEq } from './nodes/boolean.js';
+import { evalToNumber, evalToString } from './nodes/coerce.js';
 import { evalFind } from './nodes/find.js';
 import { evalLiteral } from './nodes/literal.js';
 import { evalRead } from './nodes/read.js';
-import { evalMul, evalSum } from './nodes/ops.js';
+import { evalMul, evalSum, evalSumString } from './nodes/ops.js';
 import { evalReduce } from './nodes/reduce.js';
 import { DslError, type DslNode } from './types.js';
 
@@ -14,6 +15,12 @@ export function evalNode(node: DslNode, context: unknown): unknown {
       return evalSum(node, context);
     case 'mul':
       return evalMul(node, context);
+    case 'sumString':
+      return evalSumString(node, context);
+    case 'toNumber':
+      return evalToNumber(node, context);
+    case 'toString':
+      return evalToString(node, context);
     case 'reduce':
       return evalReduce(node, context);
     case 'literal':

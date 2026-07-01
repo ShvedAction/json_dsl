@@ -3,6 +3,9 @@ export type DslNode =
   | ReduceNode
   | SumNode
   | MulNode
+  | SumStringNode
+  | ToNumberNode
+  | ToStringNode
   | LiteralNode
   | EqNode
   | StrictEqNode
@@ -73,6 +76,22 @@ export type MulNode = {
   type: 'mul';
   op1: DslNode;
   op2: DslNode;
+};
+
+export type SumStringNode = {
+  type: 'sumString';
+  op1: DslNode;
+  op2: DslNode;
+};
+
+export type ToNumberNode = {
+  type: 'toNumber';
+  op: DslNode;
+};
+
+export type ToStringNode = {
+  type: 'toString';
+  op: DslNode;
 };
 
 export type Computation = DslNode & { id: string };

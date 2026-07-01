@@ -19,7 +19,11 @@
 | **read** | Узел чтения значения по path из source data или reduce-контекста |
 | **path** | Массив `(string \| number)[]` — ключи объекта или индексы массива |
 | **reduce** | Итерация по коллекции с агрегатором; контекст: `accumulator`, `item` |
-| **aggregator** | Функция свёртки внутри reduce (`sum`, …) |
+| **aggregator** | Выражение свёртки внутри reduce (`sum`, `sumString`, …) |
+| **sum** / **mul** | Арифметика над числами |
+| **sumString** | Конкатенация двух строк |
+| **toNumber** | `string` → `number` (`Number()`) |
+| **toString** | `number` → `string` (`String()`) |
 | **accumulator** | Текущее накопленное значение при reduce; path `["accumulator"]` |
 | **item** | Текущий элемент коллекции при reduce; path `["item", …]` |
 | **Result** | `{ id: string, value: unknown }` — один элемент выходного массива |
