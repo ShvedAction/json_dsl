@@ -1,5 +1,5 @@
-import { evalNode } from '../eval.js';
-import { DslError, type ReduceNode } from '../types.js';
+import { evalNode } from '../eval';
+import { DslError, type ReduceNode } from '../types';
 
 function asNumber(value: unknown): number {
   if (typeof value !== 'number' || Number.isNaN(value)) {

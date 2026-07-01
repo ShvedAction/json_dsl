@@ -1,7 +1,7 @@
-import { evalRead } from './nodes/read.js';
-import { evalMul, evalSum } from './nodes/ops.js';
-import { evalReduce } from './nodes/reduce.js';
-import { DslError, type DslNode } from './types.js';
+import { evalRead } from './nodes/read';
+import { evalMul, evalSum } from './nodes/ops';
+import { evalReduce } from './nodes/reduce';
+import { DslError, type DslNode } from './types';
 
 export function evalNode(node: DslNode, context: unknown): unknown {
   switch (node.type) {

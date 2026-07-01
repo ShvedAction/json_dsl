@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { resolvePath } from '../src/path.js';
-import { DslError } from '../src/types.js';
+import { resolvePath } from '../src/path';
+import { DslError } from '../src/types';
 
 describe('resolvePath', () => {
   it('resolves object keys and array indices', () => {

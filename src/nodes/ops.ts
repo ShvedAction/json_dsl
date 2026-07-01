@@ -1,5 +1,5 @@
-import { evalNode } from '../eval.js';
-import { DslError, type MulNode, type SumNode } from '../types.js';
+import { evalNode } from '../eval';
+import { DslError, type MulNode, type SumNode } from '../types';
 
 function asNumber(value: unknown, op: string): number {
   if (typeof value !== 'number' || Number.isNaN(value)) {

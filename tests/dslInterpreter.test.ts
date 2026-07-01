@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { dslInterpreter } from '../src/index.js';
-import { DslError } from '../src/types.js';
-import type { DslProgram } from '../src/types.js';
+import { dslInterpreter } from '../src/index';
+import { DslError } from '../src/types';
+import type { DslProgram } from '../src/types';
 import fixture from './fixtures/cart-equipment.json' with { type: 'json' };
 
 const tc001Program = fixture.program as DslProgram;

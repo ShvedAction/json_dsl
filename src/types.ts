@@ -2,7 +2,48 @@ export type DslNode =
   | ReadNode
   | ReduceNode
   | SumNode
-  | MulNode;
+  | MulNode
+  | LiteralNode
+  | EqNode
+  | AndNode
+  | OrNode
+  | NotNode
+  | FindNode;
+
+export type LiteralNode = {
+  type: 'literal';
+  value: string | number | boolean | null;
+};
+
+export type EqNode = {
+  type: 'eq';
+  left: DslNode;
+  right: DslNode;
+};
+
+export type AndNode = {
+  type: 'and';
+  op1: DslNode;
+  op2: DslNode;
+};
+
+export type OrNode = {
+  type: 'or';
+  op1: DslNode;
+  op2: DslNode;
+};
+
+export type NotNode = {
+  type: 'not';
+  op: DslNode;
+};
+
+export type FindNode = {
+  type: 'find';
+  collection: DslNode;
+  predicate: DslNode;
+  path?: (string | number)[];
+};
 
 export type ReadNode = {
   type: 'read';

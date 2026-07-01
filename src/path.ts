@@ -1,4 +1,4 @@
-import { DslError } from './types.js';
+import { DslError } from './types';
 
 export function resolvePath(context: unknown, path: (string | number)[]): unknown {
   let current: unknown = context;

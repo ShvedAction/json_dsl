@@ -1,9 +1,9 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { evalRead } from '../src/nodes/read.js';
-import { evalReduce } from '../src/nodes/reduce.js';
-import { evalNode } from '../src/eval.js';
-import { DslError } from '../src/types.js';
+import { evalRead } from '../src/nodes/read';
+import { evalReduce } from '../src/nodes/reduce';
+import { evalNode } from '../src/eval';
+import { DslError } from '../src/types';
 import fixture from './fixtures/cart-equipment.json' with { type: 'json' };
 
 describe('evalRead', () => {

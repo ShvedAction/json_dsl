@@ -1,8 +1,8 @@
-import { evalNode } from './eval.js';
-import type { ComputationResult, DslNode, DslProgram } from './types.js';
+import { evalNode } from './eval';
+import type { ComputationResult, DslNode, DslProgram } from './types';
 
-export type { DslProgram, ComputationResult, DslNode, DslErrorCode } from './types.js';
-export { DslError } from './types.js';
+export type { DslProgram, ComputationResult, DslNode, DslErrorCode } from './types';
+export { DslError } from './types';
 
 /**
  * Evaluates a DSL program against source data.

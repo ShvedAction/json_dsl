@@ -1,0 +1,61 @@
+{
+  "source": {
+    "equipment": [
+      {
+        "name": "cable",
+        "nested_collection": [
+          { "some_property": "other", "id": 1 }
+        ],
+        "prop": { "path": "/api/cable" }
+      },
+      {
+        "name": "router",
+        "nested_collection": [
+          { "some_property": "other", "id": 10 },
+          { "some_property": "some_string_value", "id": 20 }
+        ],
+        "prop": { "path": "/api/router" }
+      },
+      {
+        "name": "modem",
+        "nested_collection": [],
+        "prop": { "path": "/api/modem" }
+      }
+    ]
+  },
+  "program": {
+    "version": "1.0",
+    "computations": [
+      {
+        "type": "find",
+        "collection": { "type": "read", "path": ["equipment"] },
+        "predicate": {
+          "type": "find",
+          "collection": { "type": "read", "path": ["item", "nested_collection"] },
+          "predicate": {
+            "type": "eq",
+            "left": { "type": "read", "path": ["item", "some_property"] },
+            "right": { "type": "literal", "value": "some_string_value" }
+          }
+        },
+        "path": ["prop", "path"],
+        "id": "foundPath"
+      }
+    ]
+  },
+  "findWholeItemProgram": {
+    "version": "1.0",
+    "computations": [
+      {
+        "type": "find",
+        "collection": { "type": "read", "path": ["equipment"] },
+        "predicate": {
+          "type": "eq",
+          "left": { "type": "read", "path": ["item", "name"] },
+          "right": { "type": "literal", "value": "router" }
+        },
+        "id": "routerItem"
+      }
+    ]
+  }
+}
