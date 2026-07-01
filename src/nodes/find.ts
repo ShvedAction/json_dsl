@@ -1,6 +1,6 @@
-import { evalNode } from '../eval.js';
-import { resolvePath } from '../path.js';
-import { DslError, type DslNode, type FindNode } from '../types.js';
+import { evalNode } from '../eval';
+import { resolvePath } from '../path';
+import { DslError, type DslNode, type FindNode } from '../types';
 
 function predicateTruthy(result: unknown, predicateNode: DslNode): boolean {
   if (typeof result === 'boolean') {

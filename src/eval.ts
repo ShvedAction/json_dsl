@@ -1,11 +1,11 @@
-import { evalAnd, evalEq, evalNot, evalOr, evalStrictEq } from './nodes/boolean.js';
-import { evalToNumber, evalToString } from './nodes/coerce.js';
-import { evalFind } from './nodes/find.js';
-import { evalLiteral } from './nodes/literal.js';
-import { evalRead } from './nodes/read.js';
-import { evalMul, evalSum, evalSumString } from './nodes/ops.js';
-import { evalReduce } from './nodes/reduce.js';
-import { DslError, type DslNode } from './types.js';
+import { evalAnd, evalEq, evalNot, evalOr, evalStrictEq } from './nodes/boolean';
+import { evalToNumber, evalToString } from './nodes/coerce';
+import { evalFind } from './nodes/find';
+import { evalLiteral } from './nodes/literal';
+import { evalRead } from './nodes/read';
+import { evalMul, evalSum, evalSumString } from './nodes/ops';
+import { evalReduce } from './nodes/reduce';
+import { DslError, type DslNode } from './types';
 
 export function evalNode(node: DslNode, context: unknown): unknown {
   switch (node.type) {

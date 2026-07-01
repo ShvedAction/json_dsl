@@ -1,5 +1,5 @@
-import { evalNode } from '../eval.js';
-import { DslError, type AndNode, type EqNode, type NotNode, type OrNode, type StrictEqNode } from '../types.js';
+import { evalNode } from '../eval';
+import { DslError, type AndNode, type EqNode, type NotNode, type OrNode, type StrictEqNode } from '../types';
 
 function asBoolean(value: unknown, op: string): boolean {
   if (typeof value !== 'boolean') {

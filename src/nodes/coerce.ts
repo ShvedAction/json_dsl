@@ -1,5 +1,5 @@
-import { evalNode } from '../eval.js';
-import { DslError, type ToNumberNode, type ToStringNode } from '../types.js';
+import { evalNode } from '../eval';
+import { DslError, type ToNumberNode, type ToStringNode } from '../types';
 
 function asString(value: unknown, op: string): string {
   if (typeof value !== 'string') {

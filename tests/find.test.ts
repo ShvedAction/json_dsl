@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { evalNode } from '../src/eval.js';
-import { DslError } from '../src/types.js';
+import { evalNode } from '../src/eval';
+import { DslError } from '../src/types';
 import fixture from './fixtures/nested-find.json' with { type: 'json' };
 
 const nestedFindPredicate = {

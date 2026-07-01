@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { evalNode } from '../src/eval.js';
-import { DslError } from '../src/types.js';
+import { evalNode } from '../src/eval';
+import { DslError } from '../src/types';
 
 describe('eq (==)', () => {
   it('eq uses loose equality like JS ==', () => {

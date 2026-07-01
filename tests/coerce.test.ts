@@ -1,8 +1,8 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { evalNode } from '../src/eval.js';
-import { dslInterpreter } from '../src/index.js';
-import { DslError } from '../src/types.js';
+import { evalNode } from '../src/eval';
+import { dslInterpreter } from '../src/index';
+import { DslError } from '../src/types';
 
 describe('toNumber', () => {
   it('converts numeric string to number', () => {
